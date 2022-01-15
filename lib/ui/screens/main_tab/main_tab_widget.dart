@@ -47,24 +47,18 @@ class _BottomBar extends StatelessWidget {
     final currentIndex =
         context.select((MainTabModel value) => value.currentTabIndex);
     final theme = Theme.of(context).bottomNavigationBarTheme;
-    final buttons = [
+    final buttons = const [
       _ButtonWidget(
         iconName: AppImages.union,
         textLable: 'ДНЕВНИК',
-        topLeft: context.read<MainTabModel>().topOneLeft,
-        topRight: context.read<MainTabModel>().topOneRight,
       ),
       _ButtonWidget(
         iconName: AppImages.scatictic,
         textLable: 'СТАТИСТИКА',
-        topLeft: context.read<MainTabModel>().topTwoLeft,
-        topRight: context.read<MainTabModel>().topTwoRight,
       ),
       _ButtonWidget(
         iconName: AppImages.profile,
         textLable: 'ПРОФИЛЬ',
-        topLeft: context.read<MainTabModel>().topTreeLeft,
-        topRight: context.read<MainTabModel>().topTreeRight,
       ),
     ]
         .asMap()
@@ -85,13 +79,10 @@ class _BottomBar extends StatelessWidget {
 class _ButtonWidget {
   final String iconName;
   final String textLable;
-  final double topLeft;
-  final double topRight;
+  static const _cornerRadius = 10.0;
   const _ButtonWidget({
     required this.iconName,
     required this.textLable,
-    required this.topLeft,
-    required this.topRight,
   });
 
   ElevatedButton build(int index, int currentIndex,
@@ -101,6 +92,8 @@ class _ButtonWidget {
     final colorLable = index == currentIndex
         ? theme.selectedItemColor
         : theme.unselectedItemColor;
+    final topLeft = index == currentIndex + 1 ? _cornerRadius : 0.0;
+    final topRight = index == currentIndex - 1 ? _cornerRadius : 0.0;
     return ElevatedButton(
         style: ButtonStyle(
           animationDuration: Duration.zero,
