@@ -115,6 +115,7 @@ class _SaveButton extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class _ButtonAddWeight extends StatelessWidget {
   final String image;
   void Function() math;

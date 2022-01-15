@@ -224,7 +224,7 @@ class _NessesaryFieldsWidget extends StatelessWidget {
               onChanged: (text) => model.foodName = text,
               inputType: TextInputType.text,
               text: model.foodName,
-              inputFormatters: [],
+              inputFormatters: const [],
             ),
             _AllOtherStaffTextFieldWidget(
               lableText: 'Calories per serving',
