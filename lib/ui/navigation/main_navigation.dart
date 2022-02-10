@@ -26,7 +26,7 @@ class MainNavigation {
   Map<String, WidgetBuilder> get routes => <String, WidgetBuilder>{
         Screen.main: (_) => ChangeNotifierProvider(
               create: (_) => MainTabModel(),
-              child: MainTabsScreenWidget(),
+              child: const MainTabsScreenWidget(),
             ),
         Screen.addFood: (_) => ChangeNotifierProvider(
               child: const AddFoodWidget(),

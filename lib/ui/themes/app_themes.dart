@@ -1,4 +1,3 @@
-import 'package:calorie_calculator_exemple/resources/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppTheme {
