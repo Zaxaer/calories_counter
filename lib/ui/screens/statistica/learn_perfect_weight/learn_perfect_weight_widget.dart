@@ -98,14 +98,16 @@ class _MathMetodPerfectWeightWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Your perfect weight is ${model.perfectWeight} kg',
-                style: const TextStyle(
-                  color: Color(0xFFD75755),
-                  fontSize: 18,
-                  height: 1.13334,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: AppFonts.ubuntu,
+              Flexible(
+                child: Text(
+                  'Your perfect weight is ${model.perfectWeight} kg',
+                  style: const TextStyle(
+                    color: Color(0xFFD75755),
+                    fontSize: 18,
+                    height: 1.13334,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: AppFonts.ubuntu,
+                  ),
                 ),
               ),
               IconButton(

@@ -46,29 +46,28 @@ class _HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<DairyScreenModel>().caloriesOnDay;
-    return SizedBox(
+    return Container(
       height: 75,
-      child: Container(
-        height: 75,
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xFFEBDBAF),
+              offset: Offset(0.0, 15.0),
+              blurRadius: 20.0,
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0xFFEBDBAF),
-                offset: Offset(0.0, 15.0),
-                blurRadius: 20.0,
-              ),
-            ]),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
+          ]),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Padding(
               padding: const EdgeInsets.only(top: 26, left: 20),
               child: Text(
                 '$model cal so far',
@@ -79,11 +78,12 @@ class _HeaderWidget extends StatelessWidget {
                   fontFamily: AppFonts.mPlusRounded,
                   fontStyle: FontStyle.normal,
                 ),
+                softWrap: false,
               ),
             ),
-            const _ButtonAddWidget(),
-          ],
-        ),
+          ),
+          const _ButtonAddWidget(),
+        ],
       ),
     );
   }

@@ -28,69 +28,86 @@ class BodyStatisticWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(width: 30),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      model.weight[index].isPrefectWeight == false
-                          ? model.weight[index].weight.toString() + ' kg'
-                          : model.weight[index].weight.toString() +
-                              model.wantedWeight,
-                      style: const TextStyle(
-                        color: Color(0xFF333333),
-                        fontWeight: FontWeight.w800,
-                        fontSize: 18,
-                        height: 1.485,
-                        fontFamily: AppFonts.mPlusRounded,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          model.weight[index].isPrefectWeight == false
+                              ? model.weight[index].weight.toString() + ' kg'
+                              : model.weight[index].weight.toString() +
+                                  model.wantedWeight,
+                          style: const TextStyle(
+                            color: Color(0xFF333333),
+                            fontWeight: FontWeight.w800,
+                            fontSize: 18,
+                            height: 1.485,
+                            fontFamily: AppFonts.mPlusRounded,
+                          ),
+                          maxLines: 1,
+                          softWrap: false,
+                          overflow: TextOverflow.fade,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      model.weight.last == model.weight[index] ||
-                              model.isAddButton == true
-                          ? model.awesome
-                          : '',
-                      style: const TextStyle(
-                        color: Color(0xFFD75755),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18,
-                        height: 1.485,
-                        fontFamily: AppFonts.ubuntu,
-                      ),
-                    )
-                  ],
-                ),
-                Text(
-                  date,
-                  style: const TextStyle(
-                    color: Color(0xFF4F4F4F),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    height: 1.375,
-                    fontFamily: AppFonts.ubuntu,
+                      const SizedBox(width: 8),
+                      Text(
+                        model.weight.last == model.weight[index] ||
+                                model.isAddButton == true
+                            ? model.awesome
+                            : '',
+                        style: const TextStyle(
+                          color: Color(0xFFD75755),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18,
+                          height: 1.485,
+                          fontFamily: AppFonts.ubuntu,
+                        ),
+                      )
+                    ],
                   ),
-                ),
-                model.weight.last != model.weight[index] &&
-                        model.isAddButton == false
-                    ? const SizedBox(height: 48)
-                    : const SizedBox.shrink(),
-                model.isAddButton == true || model.weight.length == 1
-                    ? const _AddCurrentWeight()
-                    : const SizedBox.shrink(),
-              ],
+                  Text(
+                    date,
+                    style: const TextStyle(
+                      color: Color(0xFF4F4F4F),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      height: 1.375,
+                      fontFamily: AppFonts.ubuntu,
+                    ),
+                  ),
+                  model.weight.last != model.weight[index] &&
+                          model.isAddButton == false
+                      ? const SizedBox(height: 48)
+                      : const SizedBox.shrink(),
+                  model.isAddButton == true || model.weight.length == 1
+                      ? const _AddCurrentWeight()
+                      : const SizedBox.shrink(),
+                ],
+              ),
             ),
-            const Expanded(child: SizedBox()),
-            IconButton(
-                iconSize: 40,
-                splashRadius: 40,
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-                onPressed: () => model.deleteGroup(index),
-                icon: const Icon(Icons.delete,
-                    color: Color(0xFFC4C4C4), size: 24)),
+            // IconButton(
+            //     iconSize: 40,
+            //     splashRadius: 40,
+            //     padding: EdgeInsets.zero,
+            //     constraints: const BoxConstraints(),
+            //     onPressed: () => model.deleteGroup(index),
+            //     icon: const Icon(Icons.delete,
+            //         color: Color(0xFFC4C4C4), size: 24)),
           ],
+        ),
+        Positioned(
+          right: 0,
+          child: IconButton(
+              iconSize: 40,
+              splashRadius: 40,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              onPressed: () => model.deleteGroup(index),
+              icon:
+                  const Icon(Icons.delete, color: Color(0xFFC4C4C4), size: 24)),
         ),
         SizedBox(
           width: 15,

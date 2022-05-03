@@ -70,7 +70,7 @@ class ProfileWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(AppImages.frame43),
+                  // Image.asset(AppImages.frame43),
                 ],
               ),
             )

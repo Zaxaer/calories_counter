@@ -107,7 +107,7 @@ class _ButtonLearnPerfectWeight extends StatelessWidget {
               onTap: () => model.addPerfectWeight(context),
             ),
           ),
-        )
+        ),
       ]),
     );
   }
