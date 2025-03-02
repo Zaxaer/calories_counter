@@ -7,8 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LearnPerfectWeightBloc
     extends Bloc<LearnPerfectWeightEvent, LearnPerfectWeightState> {
   final BuildContext context;
-  LearnPerfectWeightBloc(LearnPerfectWeightState initialState, this.context)
-      : super(initialState) {
+  LearnPerfectWeightBloc(super.initialState, this.context) {
     on<LearnPerfectWeightEvent>((event, emit) {
       if (event is InputAgeLearnPerfectWeightEvent) {
         onInputAgeLearnPerfectWeight(event, emit);
@@ -65,9 +64,11 @@ class LearnPerfectWeightBloc
     GenderSelectLearnPerfectWeightEvent event,
     Emitter<LearnPerfectWeightState> emit,
   ) {
-    for (int buttonIndex = 0;
-        buttonIndex < state.isSelected.length;
-        buttonIndex++) {
+    for (
+      int buttonIndex = 0;
+      buttonIndex < state.isSelected.length;
+      buttonIndex++
+    ) {
       if (buttonIndex == event.indexGender) {
         final newList = List<bool>.from(state.isSelected);
         newList[buttonIndex] = true;
@@ -92,40 +93,46 @@ class LearnPerfectWeightBloc
     if (state.isSelected[0] == true) {
       // female
       if (egeInt <= 20) {
-        final newState =
-            state.copyWith(perfectWeight: (hightInt - 100).toString());
+        final newState = state.copyWith(
+          perfectWeight: (hightInt - 100).toString(),
+        );
         emit(newState);
       }
       if (egeInt <= 30 || egeInt >= 20) {
         final newState = state.copyWith(
-            perfectWeight:
-                ((hightInt - 100) - ((hightInt - 100) * 0.11)).toString());
+          perfectWeight:
+              ((hightInt - 100) - ((hightInt - 100) * 0.11)).toString(),
+        );
         emit(newState);
       }
       if (egeInt >= 50) {
         final newState = state.copyWith(
-            perfectWeight:
-                ((hightInt - 100) + ((hightInt - 100) * 0.06)).toString());
+          perfectWeight:
+              ((hightInt - 100) + ((hightInt - 100) * 0.06)).toString(),
+        );
         emit(newState);
       }
     }
     if (state.isSelected[1] == true) {
       // Male
       if (egeInt <= 20) {
-        final newState =
-            state.copyWith(perfectWeight: (hightInt - 110).toString());
+        final newState = state.copyWith(
+          perfectWeight: (hightInt - 110).toString(),
+        );
         emit(newState);
       }
       if (egeInt <= 30 || egeInt >= 20) {
         final newState = state.copyWith(
-            perfectWeight:
-                ((hightInt - 110) - ((hightInt - 110) * 0.11)).toString());
+          perfectWeight:
+              ((hightInt - 110) - ((hightInt - 110) * 0.11)).toString(),
+        );
         emit(newState);
       }
       if (egeInt >= 50) {
         final newState = state.copyWith(
-            perfectWeight:
-                ((hightInt - 110) + ((hightInt - 110) * 0.06)).toString());
+          perfectWeight:
+              ((hightInt - 110) + ((hightInt - 110) * 0.06)).toString(),
+        );
         emit(newState);
       }
     }

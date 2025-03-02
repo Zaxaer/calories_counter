@@ -7,7 +7,7 @@ import 'package:calories_calculator/ui/screens/dairy_screen/change_food/change_f
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChangeFoodWidget extends StatelessWidget {
-  const ChangeFoodWidget({Key? key}) : super(key: key);
+  const ChangeFoodWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +16,7 @@ class ChangeFoodWidget extends StatelessWidget {
 }
 
 class ChangeBodyWidget extends StatelessWidget {
-  const ChangeBodyWidget({
-    Key? key,
-  }) : super(key: key);
+  const ChangeBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +38,7 @@ class ChangeBodyWidget extends StatelessWidget {
 }
 
 class _AddFoodParametrsWidget extends StatelessWidget {
-  const _AddFoodParametrsWidget({
-    Key? key,
-  }) : super(key: key);
+  const _AddFoodParametrsWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +68,7 @@ class _AddFoodParametrsWidget extends StatelessWidget {
 }
 
 class _SaveButtonWidget extends StatelessWidget {
-  const _SaveButtonWidget({Key? key}) : super(key: key);
+  const _SaveButtonWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -82,13 +78,12 @@ class _SaveButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => bloc.add(AddChangeFoodEvent()),
         style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(
-            const Size(double.infinity, 54),
+          minimumSize: WidgetStateProperty.all(const Size(double.infinity, 54)),
+          elevation: WidgetStateProperty.all(0),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
-          elevation: MaterialStateProperty.all(0),
-          shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-          backgroundColor: MaterialStateProperty.all(const Color(0xFFD75755)),
+          backgroundColor: WidgetStateProperty.all(const Color(0xFFD75755)),
         ),
         child: const Text(
           'SAVE CHANGE',
@@ -106,26 +101,24 @@ class _SaveButtonWidget extends StatelessWidget {
 }
 
 class _AllOtherStaffWidget extends StatelessWidget {
-  const _AllOtherStaffWidget({Key? key}) : super(key: key);
+  const _AllOtherStaffWidget();
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<ChangeFoodBloc>();
     return Container(
-        padding: const EdgeInsets.all(20),
-        constraints: const BoxConstraints(minHeight: 255),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0xFFEBDBAF),
-              spreadRadius: 5,
-              blurRadius: 30,
-            ),
-          ],
-        ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      padding: const EdgeInsets.all(20),
+      constraints: const BoxConstraints(minHeight: 255),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: const [
+          BoxShadow(color: Color(0xFFEBDBAF), spreadRadius: 5, blurRadius: 30),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           const Text(
             'All other staff',
             style: TextStyle(
@@ -136,41 +129,46 @@ class _AllOtherStaffWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Column(children: [
-            _AllOtherStaffTextFieldWidget(
-              lableText: 'Protein per serving',
-              suffixText: 'g',
-              onChanged: (text) =>
-                  bloc.add(ProteinChangeFoodInListEvent(protein: text)),
-              inputType: TextInputType.number,
-              text: bloc.state.protein,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            ),
-            _AllOtherStaffTextFieldWidget(
-              lableText: 'Sugar per serving',
-              suffixText: 'g',
-              onChanged: (text) =>
-                  bloc.add(SugarChangeFoodInListEvent(sugar: text)),
-              inputType: TextInputType.number,
-              text: bloc.state.sugar,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            ),
-            _AllOtherStaffTextFieldWidget(
-              lableText: 'Fat per serving',
-              suffixText: 'g',
-              onChanged: (text) =>
-                  bloc.add(FatChangeFoodInListEvent(fat: text)),
-              inputType: TextInputType.number,
-              text: bloc.state.fat,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            ),
-          ])
-        ]));
+          Column(
+            children: [
+              _AllOtherStaffTextFieldWidget(
+                lableText: 'Protein per serving',
+                suffixText: 'g',
+                onChanged:
+                    (text) =>
+                        bloc.add(ProteinChangeFoodInListEvent(protein: text)),
+                inputType: TextInputType.number,
+                text: bloc.state.protein,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+              _AllOtherStaffTextFieldWidget(
+                lableText: 'Sugar per serving',
+                suffixText: 'g',
+                onChanged:
+                    (text) => bloc.add(SugarChangeFoodInListEvent(sugar: text)),
+                inputType: TextInputType.number,
+                text: bloc.state.sugar,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+              _AllOtherStaffTextFieldWidget(
+                lableText: 'Fat per serving',
+                suffixText: 'g',
+                onChanged:
+                    (text) => bloc.add(FatChangeFoodInListEvent(fat: text)),
+                inputType: TextInputType.number,
+                text: bloc.state.fat,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 
 class _NessesaryFieldsWidget extends StatelessWidget {
-  const _NessesaryFieldsWidget({Key? key}) : super(key: key);
+  const _NessesaryFieldsWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -182,11 +180,7 @@ class _NessesaryFieldsWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
-          BoxShadow(
-            color: Color(0xFFEBDBAF),
-            spreadRadius: 5,
-            blurRadius: 30,
-          ),
+          BoxShadow(color: Color(0xFFEBDBAF), spreadRadius: 5, blurRadius: 30),
         ],
       ),
       child: Column(
@@ -201,26 +195,30 @@ class _NessesaryFieldsWidget extends StatelessWidget {
               height: 1.46,
             ),
           ),
-          Column(children: [
-            _AllOtherStaffTextFieldWidget(
-              lableText: 'Food name',
-              suffixText: '',
-              onChanged: (text) =>
-                  bloc.add(FoodNameChangeInListEvent(foodName: text)),
-              inputType: TextInputType.text,
-              text: bloc.state.foodName,
-              inputFormatters: const [],
-            ),
-            _AllOtherStaffTextFieldWidget(
-              lableText: 'Calories per serving',
-              suffixText: 'cal',
-              onChanged: (text) =>
-                  bloc.add(CaloriesChangeFoodInListEvent(calories: text)),
-              inputType: TextInputType.number,
-              text: bloc.state.calories,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            ),
-          ]),
+          Column(
+            children: [
+              _AllOtherStaffTextFieldWidget(
+                lableText: 'Food name',
+                suffixText: '',
+                onChanged:
+                    (text) =>
+                        bloc.add(FoodNameChangeInListEvent(foodName: text)),
+                inputType: TextInputType.text,
+                text: bloc.state.foodName,
+                inputFormatters: const [],
+              ),
+              _AllOtherStaffTextFieldWidget(
+                lableText: 'Calories per serving',
+                suffixText: 'cal',
+                onChanged:
+                    (text) =>
+                        bloc.add(CaloriesChangeFoodInListEvent(calories: text)),
+                inputType: TextInputType.number,
+                text: bloc.state.calories,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+            ],
+          ),
           bloc.state.errorMassege == true
               ? const _ErrorTextNessesaryWidget()
               : const SizedBox.shrink(),
@@ -231,7 +229,7 @@ class _NessesaryFieldsWidget extends StatelessWidget {
 }
 
 class _ErrorTextNessesaryWidget extends StatelessWidget {
-  const _ErrorTextNessesaryWidget({Key? key}) : super(key: key);
+  const _ErrorTextNessesaryWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -261,30 +259,31 @@ class _AllOtherStaffTextFieldWidget extends StatelessWidget {
   final TextEditingController controller = TextEditingController(text: '');
 
   _AllOtherStaffTextFieldWidget({
-    Key? key,
     required this.lableText,
     required this.suffixText,
     required this.inputType,
     required this.onChanged,
     required this.text,
     required this.inputFormatters,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     controller.text = text;
-    controller.selection =
-        TextSelection.collapsed(offset: controller.text.length);
+    controller.selection = TextSelection.collapsed(
+      offset: controller.text.length,
+    );
     return TextField(
       controller: controller,
       inputFormatters: inputFormatters,
       keyboardType: inputType,
       onChanged: onChanged,
       style: const TextStyle(
-          color: Color(0xFF333333),
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          height: 1.375),
+        color: Color(0xFF333333),
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        height: 1.375,
+      ),
       decoration: InputDecoration(
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Color(0xFF9E9E9E)),
@@ -293,17 +292,16 @@ class _AllOtherStaffTextFieldWidget extends StatelessWidget {
           borderSide: BorderSide(color: Color(0xFFD75755)),
         ),
         isDense: false,
-        floatingLabelStyle: const TextStyle(
-          color: Color(0xFF333333),
-        ),
+        floatingLabelStyle: const TextStyle(color: Color(0xFF333333)),
         suffixIcon: Text(
           suffixText,
           style: const TextStyle(
-              color: Color(0xFF9E9E9E),
-              fontSize: 16,
-              fontFamily: AppFonts.ubuntu,
-              fontWeight: FontWeight.w400,
-              height: 1.375),
+            color: Color(0xFF9E9E9E),
+            fontSize: 16,
+            fontFamily: AppFonts.ubuntu,
+            fontWeight: FontWeight.w400,
+            height: 1.375,
+          ),
         ),
         suffixIconConstraints: const BoxConstraints(
           minHeight: 22,

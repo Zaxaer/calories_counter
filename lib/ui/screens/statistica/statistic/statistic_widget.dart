@@ -6,27 +6,26 @@ import 'package:calories_calculator/ui/screens/statistica/body_statistic/body_st
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StatisticWidget extends StatelessWidget {
-  const StatisticWidget({Key? key}) : super(key: key);
+  const StatisticWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<StatisticBloc>();
     return Scaffold(
-      body: bloc.state.weight.isEmpty
-          ? _ButtonWidget(
-              text: 'Add you current weight',
-              function: () =>
-                  bloc.add(NavigatorAddCurrentWeightStatisticEvent()),
-            )
-          : const _BodyStatistic(),
+      body:
+          bloc.state.weight.isEmpty
+              ? _ButtonWidget(
+                text: 'Add you current weight',
+                function:
+                    () => bloc.add(NavigatorAddCurrentWeightStatisticEvent()),
+              )
+              : const _BodyStatistic(),
     );
   }
 }
 
 class _BodyStatistic extends StatelessWidget {
-  const _BodyStatistic({
-    Key? key,
-  }) : super(key: key);
+  const _BodyStatistic();
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +40,9 @@ class _BodyStatistic extends StatelessWidget {
           bloc.state.weight.isNotEmpty &&
                   bloc.state.weight.last.isPrefectWeight == false
               ? _ButtonWidget(
-                  text: 'Learn you perfect weight',
-                  function: () => bloc.add(LearnPerfectWeightStatisticEvent()))
+                text: 'Learn you perfect weight',
+                function: () => bloc.add(LearnPerfectWeightStatisticEvent()),
+              )
               : const SizedBox.shrink(),
         ],
       ),
@@ -53,43 +53,44 @@ class _BodyStatistic extends StatelessWidget {
 class _ButtonWidget extends StatelessWidget {
   final String text;
   final void Function() function;
-  const _ButtonWidget({
-    Key? key,
-    required this.text,
-    required this.function,
-  }) : super(key: key);
+  const _ButtonWidget({required this.text, required this.function});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-            margin:
-                const EdgeInsets.only(top: 20, left: 16, right: 16, bottom: 16),
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0xFFEBDBAF),
-                  spreadRadius: 5,
-                  blurRadius: 15,
-                  offset: Offset(0, 15),
-                ),
-              ],
-            ),
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: Color(0xFF333333),
-                fontWeight: FontWeight.w800,
-                fontSize: 20,
-                height: 1.485,
-                fontFamily: AppFonts.mPlusRounded,
+          margin: const EdgeInsets.only(
+            top: 20,
+            left: 16,
+            right: 16,
+            bottom: 16,
+          ),
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0xFFEBDBAF),
+                spreadRadius: 5,
+                blurRadius: 15,
+                offset: Offset(0, 15),
               ),
-            )),
+            ],
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Color(0xFF333333),
+              fontWeight: FontWeight.w800,
+              fontSize: 20,
+              height: 1.485,
+              fontFamily: AppFonts.mPlusRounded,
+            ),
+          ),
+        ),
         Positioned(
           top: 0,
           bottom: 0,
@@ -109,9 +110,7 @@ class _ButtonWidget extends StatelessWidget {
 }
 
 class _StepWeightStatistic extends StatelessWidget {
-  const _StepWeightStatistic({
-    Key? key,
-  }) : super(key: key);
+  const _StepWeightStatistic();
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<StatisticBloc>();
@@ -131,18 +130,14 @@ class _StepWeightStatistic extends StatelessWidget {
         ],
       ),
       child: Column(
-        children: bloc.state.weight
-            .asMap()
-            .map(
-              (index, value) {
-                return MapEntry(
-                  index,
-                  BodyStatisticWidget(index: index),
-                );
-              },
-            )
-            .values
-            .toList(),
+        children:
+            bloc.state.weight
+                .asMap()
+                .map((index, value) {
+                  return MapEntry(index, BodyStatisticWidget(index: index));
+                })
+                .values
+                .toList(),
       ),
     );
   }

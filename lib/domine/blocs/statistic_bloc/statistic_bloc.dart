@@ -9,8 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
   final BuildContext context;
   final hiveRepository = HiveRepository();
-  StatisticBloc(StatisticState initialState, this.context)
-      : super(initialState) {
+  StatisticBloc(super.initialState, this.context) {
     on<StatisticEvent>((event, emit) async {
       if (event is ReadStatisticEvent) {
         await onReadStatisticEventBloc(event, emit);
@@ -61,8 +60,9 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
     NavigatorAddCurrentWeightStatisticEvent event,
     Emitter<StatisticState> emit,
   ) async {
-    final weightResult =
-        await Navigator.of(context).pushNamed(Screen.addingCurrentWeight);
+    final weightResult = await Navigator.of(
+      context,
+    ).pushNamed(Screen.addingCurrentWeight);
     await hiveRepository.saveWeightBox(state, weightResult as String);
     add(ReadStatisticEvent());
   }
@@ -71,8 +71,10 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
     LearnPerfectWeightStatisticEvent event,
     Emitter<StatisticState> emit,
   ) async {
-    final result = await Navigator.of(context)
-            .pushNamed(Screen.learnPerfectWeightWidget) ??
+    final result =
+        await Navigator.of(
+          context,
+        ).pushNamed(Screen.learnPerfectWeightWidget) ??
         '';
     final newState = state.copyWith(perfectWeight: result as String);
     emit(newState);

@@ -7,7 +7,7 @@ import 'package:calories_calculator/resources/app_fonts.dart';
 import 'package:calories_calculator/resources/resources.dart';
 
 class ListFoodWidget extends StatelessWidget {
-  const ListFoodWidget({Key? key}) : super(key: key);
+  const ListFoodWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +16,14 @@ class ListFoodWidget extends StatelessWidget {
         elevation: 3,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Image.asset(
-            AppImages.back,
-          ),
+          icon: Image.asset(AppImages.back),
           splashRadius: 20,
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: MediaQuery(
-          data: MediaQuery.of(context)
-              .copyWith(textScaler: const TextScaler.linear(1)),
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: const TextScaler.linear(1)),
           child: const _TextFieldWidget(),
         ),
       ),
@@ -34,7 +33,7 @@ class ListFoodWidget extends StatelessWidget {
 }
 
 class _FoodListWidget extends StatelessWidget {
-  const _FoodListWidget({Key? key}) : super(key: key);
+  const _FoodListWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class _FoodListWidget extends StatelessWidget {
 }
 
 class _InfoTextWidget extends StatelessWidget {
-  const _InfoTextWidget({Key? key}) : super(key: key);
+  const _InfoTextWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +91,7 @@ class _InfoTextWidget extends StatelessWidget {
 }
 
 class _ButtonAddFoodWidget extends StatelessWidget {
-  const _ButtonAddFoodWidget({Key? key}) : super(key: key);
+  const _ButtonAddFoodWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -100,17 +99,18 @@ class _ButtonAddFoodWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: ElevatedButton(
-        onPressed: () => bloc.state.listFood.isNotEmpty
-            ? bloc.add(AddDayFoodListEvent())
-            : bloc.add(AddNewFoodEvent()),
+        onPressed:
+            () =>
+                bloc.state.listFood.isNotEmpty
+                    ? bloc.add(AddDayFoodListEvent())
+                    : bloc.add(AddNewFoodEvent()),
         style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(
-            const Size(double.infinity, 54),
+          minimumSize: WidgetStateProperty.all(const Size(double.infinity, 54)),
+          elevation: WidgetStateProperty.all(0),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
-          elevation: MaterialStateProperty.all(0),
-          shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-          backgroundColor: MaterialStateProperty.all(const Color(0xFFD75755)),
+          backgroundColor: WidgetStateProperty.all(const Color(0xFFD75755)),
         ),
         child: Text(
           bloc.state.listFood.isNotEmpty ? 'SAVE' : 'ADD NEW FOOD',
@@ -128,7 +128,7 @@ class _ButtonAddFoodWidget extends StatelessWidget {
 }
 
 class _TextFieldWidget extends StatefulWidget {
-  const _TextFieldWidget({Key? key}) : super(key: key);
+  const _TextFieldWidget();
 
   @override
   State<_TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -141,8 +141,8 @@ class _TextFieldWidgetState extends State<_TextFieldWidget> {
     final bloc = context.read<FoodListBloc>();
     return TextField(
       controller: controller,
-      onChanged: (value) =>
-          bloc.add(SearchFoodListEvent(enteredKeyword: value)),
+      onChanged:
+          (value) => bloc.add(SearchFoodListEvent(enteredKeyword: value)),
       cursorHeight: 35,
       cursorColor: const Color(0xFF5DACE9),
       decoration: InputDecoration(
@@ -150,9 +150,7 @@ class _TextFieldWidgetState extends State<_TextFieldWidget> {
           iconSize: 40,
           splashRadius: 20,
           padding: EdgeInsets.zero,
-          icon: Image.asset(
-            AppImages.inputDelete,
-          ),
+          icon: Image.asset(AppImages.inputDelete),
           onPressed: () {
             controller.text = '';
             bloc.add(SearchFoodListEvent(enteredKeyword: ''));
@@ -172,33 +170,31 @@ class _TextFieldWidgetState extends State<_TextFieldWidget> {
 }
 
 class _TableFoodWidget extends StatelessWidget {
-  const _TableFoodWidget({Key? key}) : super(key: key);
+  const _TableFoodWidget();
 
   @override
   Widget build(BuildContext context) {
-    final listFood =
-        context.select((FoodListBloc value) => value.state.listFood);
+    final listFood = context.select(
+      (FoodListBloc value) => value.state.listFood,
+    );
     return listFood.isNotEmpty
         ? ListView.separated(
-            itemCount: listFood.length,
-            padding: const EdgeInsets.only(bottom: 100),
-            itemBuilder: (BuildContext context, int index) {
-              return _TableFoodNameWidget(index: index);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider(height: 1, color: Color(0xFFC8C8C8));
-            },
-          )
+          itemCount: listFood.length,
+          padding: const EdgeInsets.only(bottom: 100),
+          itemBuilder: (BuildContext context, int index) {
+            return _TableFoodNameWidget(index: index);
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const Divider(height: 1, color: Color(0xFFC8C8C8));
+          },
+        )
         : const _InfoTextWidget();
   }
 }
 
 class _TableFoodNameWidget extends StatelessWidget {
   final int index;
-  const _TableFoodNameWidget({
-    Key? key,
-    required this.index,
-  }) : super(key: key);
+  const _TableFoodNameWidget({required this.index});
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<FoodListBloc>();
@@ -274,13 +270,18 @@ class _TableFoodNameWidget extends StatelessWidget {
         ),
         trailing: IconButton(
           iconSize: 30,
-          onPressed: () => bloc.add(SelectTableFoodListEvent(
-              index: index,
-              caloriesDayFood: bloc.state.listFood[index].calories,
-              foodName: bloc.state.listFood[index].foodName)),
-          icon: bloc.state.selectedIndex != index
-              ? Image.asset(AppImages.unchecked)
-              : Image.asset(AppImages.checked),
+          onPressed:
+              () => bloc.add(
+                SelectTableFoodListEvent(
+                  index: index,
+                  caloriesDayFood: bloc.state.listFood[index].calories,
+                  foodName: bloc.state.listFood[index].foodName,
+                ),
+              ),
+          icon:
+              bloc.state.selectedIndex != index
+                  ? Image.asset(AppImages.unchecked)
+                  : Image.asset(AppImages.checked),
         ),
         children: <Widget>[
           Row(
@@ -294,9 +295,10 @@ class _TableFoodNameWidget extends StatelessWidget {
                     onPressed: () => bloc.add(DiffPorciesEvent(index: index)),
                     icon: Image.asset(
                       AppImages.minus,
-                      color: bloc.state.selectedIndex != index
-                          ? Colors.grey
-                          : null,
+                      color:
+                          bloc.state.selectedIndex != index
+                              ? Colors.grey
+                              : null,
                     ),
                   ),
                 ],
@@ -319,7 +321,7 @@ class _TableFoodNameWidget extends StatelessWidget {
                     height: 1,
                     width: 79,
                     child: ColoredBox(color: Color(0xFFCED0D6)),
-                  )
+                  ),
                 ],
               ),
               Stack(
@@ -331,9 +333,10 @@ class _TableFoodNameWidget extends StatelessWidget {
                     onPressed: () => bloc.add(SumPorciesEvent(index: index)),
                     icon: Image.asset(
                       AppImages.plus,
-                      color: bloc.state.selectedIndex != index
-                          ? Colors.grey
-                          : null,
+                      color:
+                          bloc.state.selectedIndex != index
+                              ? Colors.grey
+                              : null,
                     ),
                   ),
                 ],

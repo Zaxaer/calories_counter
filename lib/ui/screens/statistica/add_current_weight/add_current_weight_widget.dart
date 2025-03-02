@@ -7,7 +7,7 @@ import 'package:calories_calculator/resources/resources.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddCurrentWeighnWidget extends StatelessWidget {
-  const AddCurrentWeighnWidget({Key? key}) : super(key: key);
+  const AddCurrentWeighnWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,22 +44,24 @@ class AddCurrentWeighnWidget extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0xFFEBDBAF),
-                      spreadRadius: 5,
-                      blurRadius: 15,
-                      offset: Offset(0, 15),
-                    ),
-                  ]),
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xFFEBDBAF),
+                    spreadRadius: 5,
+                    blurRadius: 15,
+                    offset: Offset(0, 15),
+                  ),
+                ],
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _ButtonAddWeight(
-                      image: AppImages.minus,
-                      math: () => bloc.add(DiffCurrentWeightEvent())),
+                    image: AppImages.minus,
+                    math: () => bloc.add(DiffCurrentWeightEvent()),
+                  ),
                   const SizedBox(width: 8),
                   _InputWeightWidget(),
                   const SizedBox(width: 8),
@@ -80,7 +82,7 @@ class AddCurrentWeighnWidget extends StatelessWidget {
 }
 
 class _SaveButtonWidget extends StatelessWidget {
-  const _SaveButtonWidget({Key? key}) : super(key: key);
+  const _SaveButtonWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +93,12 @@ class _SaveButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => bloc.add(NavigatorPopCurrentWeight()),
         style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(
-            const Size(double.infinity, 54),
+          minimumSize: WidgetStateProperty.all(const Size(double.infinity, 54)),
+          elevation: WidgetStateProperty.all(0),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
-          elevation: MaterialStateProperty.all(0),
-          shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-          backgroundColor: MaterialStateProperty.all(color),
+          backgroundColor: WidgetStateProperty.all(color),
         ),
         child: const Text(
           'SAVE',
@@ -117,11 +118,7 @@ class _SaveButtonWidget extends StatelessWidget {
 class _ButtonAddWeight extends StatelessWidget {
   final String image;
   final void Function() math;
-  const _ButtonAddWeight({
-    Key? key,
-    required this.image,
-    required this.math,
-  }) : super(key: key);
+  const _ButtonAddWeight({required this.image, required this.math});
 
   @override
   Widget build(BuildContext context) {
@@ -131,25 +128,25 @@ class _ButtonAddWeight extends StatelessWidget {
         color: const Color(0xFFF2F2F2),
       ),
       child: IconButton(
-          padding: const EdgeInsets.all(8),
-          constraints: const BoxConstraints(),
-          onPressed: () => math(),
-          icon: Image.asset(image)),
+        padding: const EdgeInsets.all(8),
+        constraints: const BoxConstraints(),
+        onPressed: () => math(),
+        icon: Image.asset(image),
+      ),
     );
   }
 }
 
 class _InputWeightWidget extends StatelessWidget {
   final TextEditingController controller = TextEditingController(text: '1');
-  _InputWeightWidget({
-    Key? key,
-  }) : super(key: key);
+  _InputWeightWidget();
   @override
   Widget build(BuildContext context) {
     final bloc = context.watch<AddCurrentWeightBloc>();
     controller.text = bloc.state.weightText;
-    controller.selection =
-        TextSelection.collapsed(offset: controller.text.length);
+    controller.selection = TextSelection.collapsed(
+      offset: controller.text.length,
+    );
     return SizedBox(
       width: 79,
       height: 40,

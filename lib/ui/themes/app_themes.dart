@@ -25,17 +25,17 @@ abstract class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          elevation: MaterialStateProperty.all(0),
-          shape: MaterialStateProperty.all(
+          elevation: WidgetStateProperty.all(0),
+          shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          backgroundColor: MaterialStateProperty.all(
+          backgroundColor: WidgetStateProperty.all(
             const Color(0xFFF6C042),
           ),
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
-          minimumSize: MaterialStateProperty.all(
+          padding: WidgetStateProperty.all(EdgeInsets.zero),
+          minimumSize: WidgetStateProperty.all(
             const Size(142, 40),
           ),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,

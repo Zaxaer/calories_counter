@@ -7,10 +7,7 @@ import 'package:calories_calculator/ui/screens/statistica/statistic/statistic_bl
 
 class BodyStatisticWidget extends StatelessWidget {
   final int index;
-  const BodyStatisticWidget({
-    Key? key,
-    required this.index,
-  }) : super(key: key);
+  const BodyStatisticWidget({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -26,31 +23,24 @@ class BodyStatisticWidget extends StatelessWidget {
             _InfoLogicWidget(bloc: bloc, index: index, date: date),
           ],
         ),
-        Positioned(
-          right: 0,
-          child: _IconWidget(bloc: bloc, index: index),
-        ),
+        Positioned(right: 0, child: _IconWidget(bloc: bloc, index: index)),
         SizedBox(
           width: 15,
           height: 15,
-          child: CustomPaint(
-            painter: _ProgressCircle(),
-          ),
+          child: CustomPaint(painter: _ProgressCircle()),
         ),
         bloc.state.weight.length > 1 &&
                 bloc.state.weight.last != bloc.state.weight[index]
             ? const Positioned(
-                top: 14,
-                left: 5,
-                child: SizedBox(
-                  width: 5,
-                  height: 500,
-                  child: ColoredBox(
-                    color: Color(0xFF5DACE9),
-                  ),
-                ),
-              )
-            : const SizedBox.shrink()
+              top: 14,
+              left: 5,
+              child: SizedBox(
+                width: 5,
+                height: 500,
+                child: ColoredBox(color: Color(0xFF5DACE9)),
+              ),
+            )
+            : const SizedBox.shrink(),
       ],
     );
   }
@@ -58,11 +48,10 @@ class BodyStatisticWidget extends StatelessWidget {
 
 class _InfoLogicWidget extends StatelessWidget {
   const _InfoLogicWidget({
-    Key? key,
     required this.bloc,
     required this.index,
     required this.date,
-  }) : super(key: key);
+  });
 
   final StatisticBloc bloc;
   final int index;
@@ -113,13 +102,12 @@ class _InfoCreateWidget extends StatelessWidget {
   final int index;
   final String date;
   const _InfoCreateWidget({
-    Key? key,
     required this.isAddButton,
     required this.awesome,
     required this.bloc,
     required this.index,
     required this.date,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -148,11 +136,7 @@ class _InfoCreateWidget extends StatelessWidget {
 }
 
 class _IconWidget extends StatelessWidget {
-  const _IconWidget({
-    Key? key,
-    required this.bloc,
-    required this.index,
-  }) : super(key: key);
+  const _IconWidget({required this.bloc, required this.index});
 
   final StatisticBloc bloc;
   final int index;
@@ -171,10 +155,7 @@ class _IconWidget extends StatelessWidget {
 }
 
 class _DataWidget extends StatelessWidget {
-  const _DataWidget({
-    Key? key,
-    required this.date,
-  }) : super(key: key);
+  const _DataWidget({required this.date});
 
   final String date;
 
@@ -197,12 +178,11 @@ class _WeightValueWidget extends StatelessWidget {
   final bool isAddButton;
   final String awesome;
   const _WeightValueWidget({
-    Key? key,
     required this.isAddButton,
     required this.awesome,
     required this.bloc,
     required this.index,
-  }) : super(key: key);
+  });
 
   final StatisticBloc bloc;
   final int index;
@@ -241,7 +221,7 @@ class _WeightValueWidget extends StatelessWidget {
             height: 1.485,
             fontFamily: AppFonts.ubuntu,
           ),
-        )
+        ),
       ],
     );
   }
@@ -262,9 +242,7 @@ class _ProgressCircle extends CustomPainter {
 }
 
 class _AddCurrentWeight extends StatelessWidget {
-  const _AddCurrentWeight({
-    Key? key,
-  }) : super(key: key);
+  const _AddCurrentWeight();
 
   @override
   Widget build(BuildContext context) {
@@ -274,15 +252,9 @@ class _AddCurrentWeight extends StatelessWidget {
       padding: EdgeInsets.only(top: 32, bottom: bottom ? 32 : 0),
       child: ElevatedButton(
         style: const ButtonStyle(
-          padding: MaterialStatePropertyAll(
-            EdgeInsets.symmetric(
-              horizontal: 5,
-            ),
-          ),
+          padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 5)),
         ),
-        onPressed: () => bloc.add(
-          NavigatorAddCurrentWeightStatisticEvent(),
-        ),
+        onPressed: () => bloc.add(NavigatorAddCurrentWeightStatisticEvent()),
         child: const Text(
           'Add current weight',
           style: TextStyle(

@@ -7,34 +7,23 @@ import 'package:calories_calculator/resources/app_fonts.dart';
 import 'package:calories_calculator/resources/resources.dart';
 
 class DairyScreenWidget extends StatelessWidget {
-  const DairyScreenWidget({Key? key}) : super(key: key);
+  const DairyScreenWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.select((DairyFoodDayBloc value) => value.state);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          bloc.data,
-        ),
-      ),
+      appBar: AppBar(title: Text(bloc.data)),
       body: const SingleChildScrollView(
         padding: EdgeInsets.only(top: 20),
-        child: Column(
-          children: [
-            _HeaderWidget(),
-            _BodyWidget(),
-          ],
-        ),
+        child: Column(children: [_HeaderWidget(), _BodyWidget()]),
       ),
     );
   }
 }
 
 class _HeaderWidget extends StatelessWidget {
-  const _HeaderWidget({
-    Key? key,
-  }) : super(key: key);
+  const _HeaderWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +32,23 @@ class _HeaderWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xFFEBDBAF),
+            offset: Offset(0.0, 15.0),
+            blurRadius: 20.0,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xFFEBDBAF),
-              offset: Offset(0.0, 15.0),
-              blurRadius: 20.0,
-            ),
-          ]),
+        ],
+      ),
       child: const Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _CaloriesDayWidget(),
-            _ButtonAddWidget(),
-          ],
+          children: [_CaloriesDayWidget(), _ButtonAddWidget()],
         ),
       ),
     );
@@ -69,9 +56,7 @@ class _HeaderWidget extends StatelessWidget {
 }
 
 class _CaloriesDayWidget extends StatelessWidget {
-  const _CaloriesDayWidget({
-    Key? key,
-  }) : super(key: key);
+  const _CaloriesDayWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +78,7 @@ class _CaloriesDayWidget extends StatelessWidget {
 }
 
 class _ButtonAddWidget extends StatelessWidget {
-  const _ButtonAddWidget({
-    Key? key,
-  }) : super(key: key);
+  const _ButtonAddWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -117,34 +100,27 @@ class _ButtonAddWidget extends StatelessWidget {
 }
 
 class _BodyDairyWidget extends StatelessWidget {
-  const _BodyDairyWidget({Key? key}) : super(key: key);
+  const _BodyDairyWidget();
 
   @override
   Widget build(BuildContext context) {
     final bloc = context.select((DairyFoodDayBloc value) => value.state);
     return Column(
-      children: bloc.dairyList
-          .asMap()
-          .map(
-            (index, value) {
-              return MapEntry(
-                index,
-                _FoodNameListWidget(index: index),
-              );
-            },
-          )
-          .values
-          .toList(),
+      children:
+          bloc.dairyList
+              .asMap()
+              .map((index, value) {
+                return MapEntry(index, _FoodNameListWidget(index: index));
+              })
+              .values
+              .toList(),
     );
   }
 }
 
 class _FoodNameListWidget extends StatelessWidget {
   final int index;
-  const _FoodNameListWidget({
-    Key? key,
-    required this.index,
-  }) : super(key: key);
+  const _FoodNameListWidget({required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +182,7 @@ class _FoodNameListWidget extends StatelessWidget {
 }
 
 class _BodyWidget extends StatelessWidget {
-  const _BodyWidget({Key? key}) : super(key: key);
+  const _BodyWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -216,20 +192,17 @@ class _BodyWidget extends StatelessWidget {
         minHeight: 360,
         minWidth: double.infinity,
       ),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
-      child: bloc.dairyList.isEmpty
-          ? const _BodyFoodEmptyWidget()
-          : const _BodyDairyWidget(),
+      decoration: const BoxDecoration(color: Colors.white),
+      child:
+          bloc.dairyList.isEmpty
+              ? const _BodyFoodEmptyWidget()
+              : const _BodyDairyWidget(),
     );
   }
 }
 
 class _BodyFoodEmptyWidget extends StatelessWidget {
-  const _BodyFoodEmptyWidget({
-    Key? key,
-  }) : super(key: key);
+  const _BodyFoodEmptyWidget();
 
   @override
   Widget build(BuildContext context) {

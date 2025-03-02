@@ -1,6 +1,5 @@
 import 'package:calories_calculator/domine/blocs/dairy_bloc/adding_new_food_bloc.dart';
 import 'package:calories_calculator/ui/screens/dairy_screen/adding_new_food/adding_new_food_event.dart';
-import 'package:calories_calculator/ui/screens/dairy_screen/adding_new_food/adding_new_food_state_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:calories_calculator/resources/app_fonts.dart';
@@ -8,12 +7,11 @@ import 'package:calories_calculator/resources/resources.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class AddNewFood extends AddNewFoodBloc {
-  AddNewFood(AddingNewFoodState initialState, BuildContext context)
-      : super(initialState, context);
+  AddNewFood(super.initialState, super.context);
 }
 
 class AddNewFoodWidget extends StatelessWidget {
-  const AddNewFoodWidget({Key? key}) : super(key: key);
+  const AddNewFoodWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +33,7 @@ class AddNewFoodWidget extends StatelessWidget {
 }
 
 class _AddFoodParametrsWidget extends StatelessWidget {
-  const _AddFoodParametrsWidget({
-    Key? key,
-  }) : super(key: key);
+  const _AddFoodParametrsWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +63,7 @@ class _AddFoodParametrsWidget extends StatelessWidget {
 }
 
 class _SaveButtonWidget extends StatelessWidget {
-  const _SaveButtonWidget({Key? key}) : super(key: key);
+  const _SaveButtonWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -77,18 +73,12 @@ class _SaveButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => bloc.add(AddNewFoodInListEvent()),
         style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(
-            const Size(double.infinity, 54),
+          minimumSize: WidgetStateProperty.all(const Size(double.infinity, 54)),
+          elevation: WidgetStateProperty.all(0),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
-          elevation: MaterialStateProperty.all(0),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.all(
-            const Color(0xFFD75755),
-          ),
+          backgroundColor: WidgetStateProperty.all(const Color(0xFFD75755)),
         ),
         child: const Text(
           'SAVE',
@@ -106,7 +96,7 @@ class _SaveButtonWidget extends StatelessWidget {
 }
 
 class _AllOtherStaffWidget extends StatelessWidget {
-  const _AllOtherStaffWidget({Key? key}) : super(key: key);
+  const _AllOtherStaffWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -118,11 +108,7 @@ class _AllOtherStaffWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
-          BoxShadow(
-            color: Color(0xFFEBDBAF),
-            spreadRadius: 5,
-            blurRadius: 30,
-          ),
+          BoxShadow(color: Color(0xFFEBDBAF), spreadRadius: 5, blurRadius: 30),
         ],
       ),
       child: Column(
@@ -143,16 +129,16 @@ class _AllOtherStaffWidget extends StatelessWidget {
               _AllOtherStaffTextFieldWidget(
                 lableText: 'Protein per serving',
                 suffixText: 'g',
-                onChanged: (text) =>
-                    bloc.add(ProteinFoodInListEvent(protein: text)),
+                onChanged:
+                    (text) => bloc.add(ProteinFoodInListEvent(protein: text)),
                 inputType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
               _AllOtherStaffTextFieldWidget(
                 lableText: 'Sugar per serving',
                 suffixText: 'g',
-                onChanged: (text) =>
-                    bloc.add(SugarFoodInListEvent(sugar: text)),
+                onChanged:
+                    (text) => bloc.add(SugarFoodInListEvent(sugar: text)),
                 inputType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
@@ -164,7 +150,7 @@ class _AllOtherStaffWidget extends StatelessWidget {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -172,7 +158,7 @@ class _AllOtherStaffWidget extends StatelessWidget {
 }
 
 class _NessesaryFieldsWidget extends StatelessWidget {
-  const _NessesaryFieldsWidget({Key? key}) : super(key: key);
+  const _NessesaryFieldsWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -184,11 +170,7 @@ class _NessesaryFieldsWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
-          BoxShadow(
-            color: Color(0xFFEBDBAF),
-            spreadRadius: 5,
-            blurRadius: 30,
-          ),
+          BoxShadow(color: Color(0xFFEBDBAF), spreadRadius: 5, blurRadius: 30),
         ],
       ),
       child: Column(
@@ -203,24 +185,26 @@ class _NessesaryFieldsWidget extends StatelessWidget {
               height: 1.46,
             ),
           ),
-          Column(children: [
-            _AllOtherStaffTextFieldWidget(
-              lableText: 'Food name',
-              suffixText: '',
-              onChanged: (text) =>
-                  bloc.add(FoodNameInListEvent(foodName: text)),
-              inputType: TextInputType.text,
-              inputFormatters: const [],
-            ),
-            _AllOtherStaffTextFieldWidget(
-              lableText: 'Calories per serving',
-              suffixText: 'cal',
-              onChanged: (text) =>
-                  bloc.add(CaloriesFoodInListEvent(calories: text)),
-              inputType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            ),
-          ]),
+          Column(
+            children: [
+              _AllOtherStaffTextFieldWidget(
+                lableText: 'Food name',
+                suffixText: '',
+                onChanged:
+                    (text) => bloc.add(FoodNameInListEvent(foodName: text)),
+                inputType: TextInputType.text,
+                inputFormatters: const [],
+              ),
+              _AllOtherStaffTextFieldWidget(
+                lableText: 'Calories per serving',
+                suffixText: 'cal',
+                onChanged:
+                    (text) => bloc.add(CaloriesFoodInListEvent(calories: text)),
+                inputType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+            ],
+          ),
           bloc.state.errorMassege == true
               ? const _ErrorTextNessesaryWidget()
               : const SizedBox.shrink(),
@@ -231,7 +215,7 @@ class _NessesaryFieldsWidget extends StatelessWidget {
 }
 
 class _ErrorTextNessesaryWidget extends StatelessWidget {
-  const _ErrorTextNessesaryWidget({Key? key}) : super(key: key);
+  const _ErrorTextNessesaryWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -258,13 +242,12 @@ class _AllOtherStaffTextFieldWidget extends StatelessWidget {
   final void Function(String) onChanged;
   final List<TextInputFormatter> inputFormatters;
   const _AllOtherStaffTextFieldWidget({
-    Key? key,
     required this.lableText,
     required this.suffixText,
     required this.inputType,
     required this.onChanged,
     required this.inputFormatters,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -273,10 +256,11 @@ class _AllOtherStaffTextFieldWidget extends StatelessWidget {
       keyboardType: inputType,
       onChanged: onChanged,
       style: const TextStyle(
-          color: Color(0xFF333333),
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          height: 1.375),
+        color: Color(0xFF333333),
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        height: 1.375,
+      ),
       decoration: InputDecoration(
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Color(0xFF9E9E9E)),
@@ -285,17 +269,16 @@ class _AllOtherStaffTextFieldWidget extends StatelessWidget {
           borderSide: BorderSide(color: Color(0xFFD75755)),
         ),
         isDense: false,
-        floatingLabelStyle: const TextStyle(
-          color: Color(0xFF333333),
-        ),
+        floatingLabelStyle: const TextStyle(color: Color(0xFF333333)),
         suffixIcon: Text(
           suffixText,
           style: const TextStyle(
-              color: Color(0xFF9E9E9E),
-              fontSize: 16,
-              fontFamily: AppFonts.ubuntu,
-              fontWeight: FontWeight.w400,
-              height: 1.375),
+            color: Color(0xFF9E9E9E),
+            fontSize: 16,
+            fontFamily: AppFonts.ubuntu,
+            fontWeight: FontWeight.w400,
+            height: 1.375,
+          ),
         ),
         suffixIconConstraints: const BoxConstraints(
           minHeight: 22,

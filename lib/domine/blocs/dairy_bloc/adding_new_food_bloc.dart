@@ -7,10 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddNewFoodBloc extends Bloc<AddNewFoodEvent, AddingNewFoodState> {
   final BuildContext context;
   final hiveRepository = HiveRepository();
-  AddNewFoodBloc(
-    AddingNewFoodState initialState,
-    this.context,
-  ) : super(initialState) {
+  AddNewFoodBloc(super.initialState, this.context) {
     on<AddNewFoodEvent>((event, emit) async {
       if (event is AddNewFoodInListEvent) {
         await onAddingNewFoodInListEvent(event, emit);

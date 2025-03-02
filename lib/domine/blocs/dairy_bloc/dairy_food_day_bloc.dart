@@ -13,8 +13,7 @@ class DairyFoodDayBloc extends Bloc<FoodEvent, DairyFoodDayListState> {
   final hiveRepository = HiveRepository();
   final BuildContext context;
 
-  DairyFoodDayBloc(DairyFoodDayListState initialState, this.context)
-      : super(initialState) {
+  DairyFoodDayBloc(super.initialState, this.context) {
     on<FoodEvent>((event, emit) async {
       if (event is ReadFoodEvent) {
         await onReadFoodEvent(event, emit);
@@ -31,13 +30,12 @@ class DairyFoodDayBloc extends Bloc<FoodEvent, DairyFoodDayListState> {
     DeleteFoodDayEvent event,
     Emitter<DairyFoodDayListState> emit,
   ) async {
-    final newList = await hiveRepository.deteleFoodDayBox(
-      event.weightIndex,
-    );
+    final newList = await hiveRepository.deteleFoodDayBox(event.weightIndex);
     final newState = state.copyWith(
-        dairyList: newList,
-        data: stringFromDate(),
-        caloriesDay: _caloriesDay(newList));
+      dairyList: newList,
+      data: stringFromDate(),
+      caloriesDay: _caloriesDay(newList),
+    );
     emit(newState);
   }
 
@@ -65,7 +63,9 @@ class DairyFoodDayBloc extends Bloc<FoodEvent, DairyFoodDayListState> {
   }
 
   DairyFoodDayListState _onState(
-      DairyFoodDayListState state, List<FoodInDay> newList) {
+    DairyFoodDayListState state,
+    List<FoodInDay> newList,
+  ) {
     final newState = state.copyWith(
       dairyList: newList,
       data: stringFromDate(),

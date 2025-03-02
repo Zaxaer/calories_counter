@@ -12,10 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FoodListBloc extends Bloc<FoodListEvent, FoodListState> {
   final BuildContext context;
   final hiveRepository = HiveRepository();
-  FoodListBloc(
-    FoodListState initialState,
-    this.context,
-  ) : super(initialState) {
+  FoodListBloc(super.initialState, this.context) {
     on<FoodListEvent>((event, emit) async {
       if (event is ReadFoodListEvent) {
         await onReadFoodListEvent(event, emit);
@@ -180,11 +177,14 @@ class FoodListBloc extends Bloc<FoodListEvent, FoodListState> {
       final newState = _onState(state, newList);
       emit(newState);
     } else {
-      results = newList
-          .where((food) => food.foodName
-              .toLowerCase()
-              .contains(event.enteredKeyword.toLowerCase()))
-          .toList();
+      results =
+          newList
+              .where(
+                (food) => food.foodName.toLowerCase().contains(
+                  event.enteredKeyword.toLowerCase(),
+                ),
+              )
+              .toList();
       final newState = state.copyWith(listFood: results);
       emit(newState);
     }

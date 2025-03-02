@@ -9,11 +9,7 @@ class ChangeFoodBloc extends Bloc<ChangeFoodEvent, ChangeFoodState> {
   final BuildContext context;
   final hiveRepository = HiveRepository();
   final int indexBox;
-  ChangeFoodBloc(
-    ChangeFoodState initialState,
-    this.context,
-    this.indexBox,
-  ) : super(initialState) {
+  ChangeFoodBloc(super.initialState, this.context, this.indexBox) {
     on<ChangeFoodEvent>((event, emit) async {
       if (event is ReadChangeFoodEvent) {
         await onReadChangeFoodEvent(event, emit);
@@ -47,11 +43,12 @@ class ChangeFoodBloc extends Bloc<ChangeFoodEvent, ChangeFoodState> {
     final foodData = await hiveRepository.openFoodChangeListBox(indexBox);
     if (foodData == null) return;
     final newState = state.copyWith(
-        calories: foodData.calories.toString(),
-        fat: foodData.fat,
-        foodName: foodData.foodName,
-        protein: foodData.proteint,
-        sugar: foodData.sugar);
+      calories: foodData.calories.toString(),
+      fat: foodData.fat,
+      foodName: foodData.foodName,
+      protein: foodData.proteint,
+      sugar: foodData.sugar,
+    );
     emit(newState);
   }
 
@@ -74,11 +71,12 @@ class ChangeFoodBloc extends Bloc<ChangeFoodEvent, ChangeFoodState> {
       emit(newState);
     } else {
       final foodAdd = FoodData(
-          calories: double.parse(state.calories),
-          foodName: state.foodName,
-          fat: state.fat,
-          proteint: state.protein,
-          sugar: state.sugar);
+        calories: double.parse(state.calories),
+        foodName: state.foodName,
+        fat: state.fat,
+        proteint: state.protein,
+        sugar: state.sugar,
+      );
       hiveRepository.changeFoodListBox(indexBox, foodAdd);
       Navigator.of(context).pop();
     }

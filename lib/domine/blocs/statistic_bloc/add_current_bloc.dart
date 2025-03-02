@@ -8,8 +8,7 @@ class AddCurrentWeightBloc
     extends Bloc<AddCurrentWeightEvent, AddCurrentWeightState> {
   final BuildContext context;
   final hiveRepository = HiveRepository();
-  AddCurrentWeightBloc(AddCurrentWeightState initialState, this.context)
-      : super(initialState) {
+  AddCurrentWeightBloc(super.initialState, this.context) {
     on<AddCurrentWeightEvent>((event, emit) {
       if (event is DiffCurrentWeightEvent) {
         onDiffCurrentWeightEvent(event, emit);
@@ -46,7 +45,8 @@ class AddCurrentWeightBloc
 
     if (intWeight >= 1) {
       final newState = state.copyWith(
-          weightText: (int.parse(state.weightText) + 1).toString());
+        weightText: (int.parse(state.weightText) + 1).toString(),
+      );
       emit(newState);
     }
   }

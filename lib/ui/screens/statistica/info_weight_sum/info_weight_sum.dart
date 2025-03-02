@@ -3,7 +3,7 @@ import 'package:calories_calculator/resources/resources.dart';
 import 'package:flutter/material.dart';
 
 class InfoSumWeight extends StatelessWidget {
-  const InfoSumWeight({Key? key}) : super(key: key);
+  const InfoSumWeight({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,10 @@ class InfoSumWeight extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Image.asset(AppImages.close,
-              color:
-                  Theme.of(context).bottomNavigationBarTheme.selectedItemColor),
+          icon: Image.asset(
+            AppImages.close,
+            color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+          ),
           splashRadius: 20,
           onPressed: () => Navigator.of(context).pop(),
         ),
@@ -55,7 +56,7 @@ class InfoSumWeight extends StatelessWidget {
 }
 
 class _SaveButtonWidget extends StatelessWidget {
-  const _SaveButtonWidget({Key? key}) : super(key: key);
+  const _SaveButtonWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -65,21 +66,21 @@ class _SaveButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => Navigator.of(context).pop(),
         style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(
-            const Size(double.infinity, 54),
+          minimumSize: WidgetStateProperty.all(const Size(double.infinity, 54)),
+          elevation: WidgetStateProperty.all(0),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
-          elevation: MaterialStateProperty.all(0),
-          shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-          backgroundColor: MaterialStateProperty.all(color),
+          backgroundColor: WidgetStateProperty.all(color),
         ),
         child: const Text(
           'OK',
           style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontFamily: AppFonts.mPlusRounded,
-              fontSize: 18,
-              height: 1.33),
+            fontWeight: FontWeight.w800,
+            fontFamily: AppFonts.mPlusRounded,
+            fontSize: 18,
+            height: 1.33,
+          ),
         ),
       ),
     );
