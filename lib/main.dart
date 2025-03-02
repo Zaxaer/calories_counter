@@ -1,4 +1,4 @@
-import 'package:calories_calculator/ui/my_app/my_app.dart';
+import 'package:calories_calculator/presentation/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
