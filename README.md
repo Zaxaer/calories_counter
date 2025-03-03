@@ -1,16 +1,27 @@
-# calories_calculator
+# Пет проект -  Калькулятор калорий
 
-A new Flutter project.
+Это приложение позволяет Вам контролировать потребление суточную норму потребления калорий.
 
-## Getting Started
+![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/add_food_screen.png)
+![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/diary_screen.png)
+![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/statistic_screen.png)
 
-This project is a starting point for a Flutter application.
+## Архитертура проекта
 
-A few resources to get you started if this is your first Flutter project:
+Пет проект выполнен на архитектуре Bloc. Для небольшого проекта на пару экранов мне это было более чем достаточно. С заделом на будующие обновления и расширения функционала.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/bloc_structura.png)
+![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/arch_bloc.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## DI
+
+В проекте реализован DI. Он позволит нам, в случае необходимости поменять метод хранения данных, сделать это быстро и без переписывания большого колличества кода. Сам DI внедрен в фабрике экранов screen_factory.
+
+![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/di_in_bloc.png)
+![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/di_in_screen_factory.png)
+
+## Хранение данных
+
+ Для хранения данных был использован Hive. Он быстрый и позволяет хранить объекты что очень удобно.
+
+ ![alt text](http://url/to/img.png)

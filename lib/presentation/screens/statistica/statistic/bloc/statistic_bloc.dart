@@ -8,12 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
   final BuildContext context;
-  final StatisticaRepo hiveRepository;
-  StatisticBloc(
-    super.initialState,
-    this.context, {
-    required this.hiveRepository,
-  }) {
+  final StatisticaRepo repository;
+  StatisticBloc(super.initialState, this.context, {required this.repository}) {
     on<StatisticEvent>((event, emit) async {
       if (event is ReadStatisticEvent) {
         await onReadStatisticEventBloc(event, emit);
@@ -42,7 +38,7 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
     final weightResult = await Navigator.of(
       context,
     ).pushNamed(Screen.addingCurrentWeight);
-    await hiveRepository.saveWeightBox(state, weightResult as String);
+    await repository.saveWeightBox(state, weightResult as String);
     add(ReadStatisticEvent());
   }
 
@@ -50,7 +46,7 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
     ReadStatisticEvent event,
     Emitter<StatisticState> emit,
   ) async {
-    final newBox = await hiveRepository.createStatisticBox();
+    final newBox = await repository.createStatisticBox();
     final newState = state.copyWith(weight: newBox);
     emit(newState);
   }
@@ -67,7 +63,7 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
     DeleteWeightStatisticEvent event,
     Emitter<StatisticState> emit,
   ) async {
-    await hiveRepository.deleteStatisticBox(event.index, state);
+    await repository.deleteStatisticBox(event.index, state);
     add(ReadStatisticEvent());
   }
 
@@ -82,7 +78,7 @@ class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
         '';
     final newState = state.copyWith(perfectWeight: result as String);
     emit(newState);
-    hiveRepository.updatePerfectWeightStatisticBox(state);
+    repository.updatePerfectWeightStatisticBox(state);
     add(ReadStatisticEvent());
   }
 }

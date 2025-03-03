@@ -15,23 +15,21 @@ class MainScreenWidget extends StatelessWidget {
     final currentTabIndex = context.select(
       (MainScreenBloc value) => value.state.currentTabIndex,
     );
-    return SafeArea(
-      child: Scaffold(
-        body: AnimatedSwitcher(
-          transitionBuilder: AnimatedSwitcher.defaultTransitionBuilder,
-          duration: Duration(milliseconds: 300),
-          child: IndexedStack(
-            key: ValueKey<int>(currentTabIndex),
-            index: currentTabIndex,
-            children: [
-              screenFactory.dairyScreenWidget(),
-              screenFactory.statisticWidget(),
-              screenFactory.profileWidget(),
-            ],
-          ),
+    return Scaffold(
+      body: AnimatedSwitcher(
+        transitionBuilder: AnimatedSwitcher.defaultTransitionBuilder,
+        duration: Duration(milliseconds: 300),
+        child: IndexedStack(
+          key: ValueKey<int>(currentTabIndex),
+          index: currentTabIndex,
+          children: [
+            screenFactory.dairyScreenWidget(),
+            screenFactory.statisticWidget(),
+            screenFactory.profileWidget(),
+          ],
         ),
-        bottomNavigationBar: const _BottomBarWidget(),
       ),
+      bottomNavigationBar: const _BottomBarWidget(),
     );
   }
 }

@@ -74,7 +74,7 @@ class ScreenFactory {
           (context) => StatisticBloc(
             const StatisticState.initialState(),
             context,
-            hiveRepository: StatisticaRepoLoca(),
+            repository: StatisticaRepoLoca(),
           ),
       child: const StatisticWidget(),
     );
