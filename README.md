@@ -1,7 +1,7 @@
 # Пет проект -  Калькулятор калорий
 
 Это приложение позволяет Вам контролировать потребление суточную норму потребления калорий.
-
+<img src="https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/add_food_screen.png" height="100" alt="Bloc" />
 ![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/add_food_screen.png?raw=true)
 ![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/diary_screen.png)
 ![alt text](https://github.com/Zaxaer/calories_counter/tree/main/assets/github_image/statistic_screen.png)
