@@ -19,7 +19,8 @@
 
 <img src="assets/github_image/di_in_bloc.png?raw=true" height="200" alt="Bloc" />
 
-Вместо StatisticaRepoLocal можно подставить другой репозиторий со своим типом хранения данных и не переписывать логику экрана
+Вместо StatisticaRepoLocal можно подставить другой репозиторий со своим типом хранения данных и не переписывать логику экрана.
+
 <img src="assets/github_image/di_in_screen_factory.png?raw=true" height="200" alt="Bloc" />
 
 ## Хранение данных
